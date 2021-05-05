@@ -1,0 +1,7 @@
+build:
+  image: minds/pulsar-php-client-build
+  script: make -j4
+  artifacts:
+    name: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - output

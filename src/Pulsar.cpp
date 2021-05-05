@@ -8,7 +8,7 @@
 
 extern "C" {
 PHPCPP_EXPORT void *get_module() {
-    static Php::Extension extension("pulsar-phpcpp", "0.1");
+    static Php::Extension extension("pulsar", "1.0");
 
     Php::Namespace pulsarNamespace("Pulsar");
 

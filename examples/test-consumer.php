@@ -5,7 +5,7 @@ use Pulsar\Consumer;
 use Pulsar\ConsumerConfiguration;
 use Pulsar\MessageBuilder;
 
-$client = new Client("pulsar://10.217.0.224:6650");
+$client = new Client("pulsar://127.0.0.1:6650");
 
 $config = new ConsumerConfiguration();
 $config->setConsumerType(Consumer::ConsumerShared);

@@ -1,20 +1,25 @@
 CPP             = g++
 RM              = rm -f
+MKDIR_P			= mkdir -p
 CPP_FLAGS       = -Wall -c -I. -g -std=c++11
 
 LD              = g++
-LD_FLAGS        = -Wall -shared -O2
-RESULT          = pulsar-phpcpp.so
+LD_FLAGS        = -Wall -shared -O2 -L/usr/lib
+RESULT          = output/pulsar.so
 
 SOURCES	        = $(wildcard src/*.cpp)
 OBJECTS         = $(SOURCES:%.cpp=%.o)
 
+DEPENDENCIES	= -lphpcpp -lpulsar
+
 all:	${OBJECTS} ${RESULT}
 
 ${RESULT}: ${OBJECTS}
-	${LD} ${LD_FLAGS} -o $@ ${OBJECTS} -lphpcpp -lpulsar
+	${MKDIR_P} output
+	${LD} ${LD_FLAGS} -o $@ ${OBJECTS} ${DEPENDENCIES}
 
 clean:
+	${RM} -r output
 	${RM} *.obj *~* ${OBJECTS} ${RESULT}
 
 src/%.o: src/%.cpp

@@ -9,8 +9,8 @@ class MessageId : public Php::Base {
 
     MessageId(pulsar::MessageId msgId);
 
-    static Php::Value earliest(Php::Parameters &params);
-    static Php::Value latest(Php::Parameters &params);
+    static Php::Value earliest();
+    static Php::Value latest();
 
     Php::Value getTopicName();
     void setTopicName(Php::Parameters &params);

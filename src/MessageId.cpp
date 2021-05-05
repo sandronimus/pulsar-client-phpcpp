@@ -5,13 +5,13 @@
 
 MessageId::MessageId(pulsar::MessageId messageId) { this->messageId = messageId; }
 
-static Php::Value earliest()
+Php::Value MessageId::earliest()
 {
     auto messageId = new MessageId(pulsar::MessageId::earliest());
     return Php::Object(MESSAGE_ID_CLASS_NAME, messageId);
 }
 
-static Php::Value latest()
+Php::Value MessageId::latest()
 {
     auto messageId = new MessageId(pulsar::MessageId::latest());
     return Php::Object(MESSAGE_ID_CLASS_NAME, messageId);
