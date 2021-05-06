@@ -48,4 +48,5 @@ void registerMessageId(Php::Namespace &pulsarNamespace)
     messageId.method<&MessageId::getTopicName>("getTopicName");
     messageId.method<&MessageId::serialize>("serialize");
     messageId.method<&MessageId::deserialize>("deserialize");
+    pulsarNamespace.add(messageId);
 }

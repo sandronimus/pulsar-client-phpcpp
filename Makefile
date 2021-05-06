@@ -4,7 +4,7 @@ MKDIR_P			= mkdir -p
 CPP_FLAGS       = -Wall -c -I. -g -std=c++11
 
 LD              = g++
-LD_FLAGS        = -Wall -shared -O2 -L/usr/lib
+LD_FLAGS        = -Wall -shared -O2
 RESULT          = output/pulsar.so
 
 SOURCES	        = $(wildcard src/*.cpp)

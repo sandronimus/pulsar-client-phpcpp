@@ -12,12 +12,12 @@ class Message : public Php::Base {
 
     Php::Value getDataAsString();
 
-    // Php::Value getProperties();
-    // Php::Value hasProperty(Php::Parameters &params);
-    // Php::Value getProperty(Php::Parameters &params);
-    // Php::Value getMessageId();
-    // Php::Value getPartitionKey(Php::Parameters &params);
-    // Php::Value hasPartitionKey();
+    Php::Value getProperties();
+    Php::Value hasProperty(Php::Parameters &params);
+    Php::Value getProperty(Php::Parameters &params);
+    Php::Value getMessageId();
+    Php::Value getPartitionKey();
+    Php::Value hasPartitionKey();
 };
 
 void registerMessage(Php::Namespace &pulsarNamespace);

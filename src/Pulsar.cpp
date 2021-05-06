@@ -2,6 +2,7 @@
 #include "Consumer.h"
 #include "ConsumerConfiguration.h"
 #include "Message.h"
+#include "MessageId.h"
 #include "MessageBuilder.h"
 #include "Producer.h"
 #include <phpcpp.h>
@@ -13,6 +14,7 @@ PHPCPP_EXPORT void *get_module() {
     Php::Namespace pulsarNamespace("Pulsar");
 
     registerMessage(pulsarNamespace);
+    registerMessageId(pulsarNamespace);
     registerMessageBuilder(pulsarNamespace);
     registerProducer(pulsarNamespace);
     registerConsumer(pulsarNamespace);

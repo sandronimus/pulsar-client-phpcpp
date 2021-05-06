@@ -11,10 +11,13 @@
 
 ```
 git clone git@gitlab.com:minds/pulsar-php-client.git
+make clean
 make -j4
 ```
 
 ## Examples
+
+`php -dextension=./pulsar.so examples/test-consumer.php`
 
 See [examples](./examples) for more examples.
 
