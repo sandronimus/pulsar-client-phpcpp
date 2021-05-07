@@ -5,6 +5,9 @@
 #include "MessageId.h"
 #include "MessageBuilder.h"
 #include "Producer.h"
+#include "ProducerConfiguration.h"
+#include "Result.h"
+#include "Schema.h"
 #include <phpcpp.h>
 
 extern "C" {
@@ -17,9 +20,12 @@ PHPCPP_EXPORT void *get_module() {
     registerMessageId(pulsarNamespace);
     registerMessageBuilder(pulsarNamespace);
     registerProducer(pulsarNamespace);
+    registerProducerConfiguration(pulsarNamespace);
     registerConsumer(pulsarNamespace);
     registerClient(pulsarNamespace);
     registerConsumerConfiguration(pulsarNamespace);
+    registerSchema(pulsarNamespace);
+    registerResult(pulsarNamespace);
 
     extension.add(pulsarNamespace);
 

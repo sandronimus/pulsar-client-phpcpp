@@ -3,14 +3,30 @@
 use Pulsar\Client;
 use Pulsar\Consumer;
 use Pulsar\ConsumerConfiguration;
-use Pulsar\MessageBuilder;
+use Pulsar\SchemaType;
 
 $client = new Client("pulsar://127.0.0.1:6650");
 
+$schema = json_encode([
+    'type' => 'record', // ??
+    'name' => 'test',
+    'fields' => [
+        [
+            'name' => 'foo',
+            'type' => 'string',
+        ],
+        [
+            'name' => 'iteration',
+            'type' => 'int',
+        ],
+    ]
+]);
+
 $config = new ConsumerConfiguration();
 $config->setConsumerType(Consumer::ConsumerShared);
+$config->setSchema(SchemaType::AVRO, "test", $schema, []);
 
-$consumer = $client->subscribe("persistent://prop/r1/ns1/test-topic", "consumer-1", $config);
+$consumer = $client->subscribe("test-topic-with-schema", "consumer-1", $config);
 
 while (true) {
     $message = $consumer->receive();

@@ -10,7 +10,7 @@ class Producer : public Php::Base {
 
     Producer() {}
 
-    void send(Php::Parameters &params);
+    Php::Value send(Php::Parameters &params);
 };
 
 void registerProducer(Php::Namespace &pulsarNamespace);

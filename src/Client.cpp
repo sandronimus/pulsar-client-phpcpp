@@ -2,6 +2,7 @@
 #include "Consumer.h"
 #include "ConsumerConfiguration.h"
 #include "Producer.h"
+#include "ProducerConfiguration.h"
 
 void Client::__construct(Php::Parameters &params) {
     std::string serviceUrl = params[0];
@@ -10,8 +11,21 @@ void Client::__construct(Php::Parameters &params) {
 
 Php::Value Client::createProducer(Php::Parameters &params) {
     Producer *producer = new Producer();
-    this->client->createProducer(params[0], producer->producer);
-    return Php::Object("Pulsar\\Producer", producer);
+    std::string topic = params[0];
+
+    if (params.size() == 1) {
+        this->client->createProducer(topic, producer->producer);
+        return Php::Object("Pulsar\\Producer", producer);
+    }
+
+    if (params.size() == 2) {
+        auto conf = (ProducerConfiguration *)(params[1].implementation());
+        this->client->createProducer(topic, conf->config, producer->producer);
+        return Php::Object("Pulsar\\Producer", producer);
+    }
+
+    ProducerConfiguration producerConf;
+    
 }
 
 Php::Value Client::subscribe(Php::Parameters &params) {

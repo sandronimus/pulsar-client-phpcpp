@@ -2,20 +2,55 @@
 
 use Pulsar\Client;
 use Pulsar\MessageBuilder;
+use Pulsar\ProducerConfiguration;
+use Pulsar\SchemaType;
+use Pulsar\Result;
 
 $client = new Client("pulsar://127.0.0.1:6650");
 
-$producer = $client->createProducer("persistent://prop/r1/ns1/test-topic");
+$schema = json_encode([
+    'type' => 'record', // ??
+    'name' => 'test',
+    'fields' => [
+        [
+            'name' => 'foo',
+            'type' => 'string',
+        ],
+        [
+            'name' => 'iteration',
+            'type' => 'int',
+        ],
+    ]
+]);
 
-$prop = [
-    "a" => 1,
-];
+$config = new ProducerConfiguration();
+$config->setSchema(SchemaType::AVRO, "test", $schema, []);
 
-$builder = new MessageBuilder();
-$builder->setContent("Amazing " . time())
-        ->setProperties($prop);
+$producer = $client->createProducer("test-topic-with-schema", $config);
 
-unset($prop);
+$i = 0;
+while (true) {
+    $prop = [
+        "a" => ++$i,
+    ];
 
-$message = $builder->setDeliverAfter(300)->build();
-$producer->send($message);
+    $builder = new MessageBuilder();
+    $builder->setContent(json_encode([
+        'foo' => 'bar',
+        'iteration' => $i,
+    ]))
+    ->setProperties($prop);
+
+
+
+    $message = $builder->setDeliverAfter(300)->build();
+    $result = $producer->send($message);
+
+    if ($result === Result::ResultOk) {
+        echo "\n success";
+    } else {
+        echo "\n could not send $result";
+    }
+
+    sleep(10);
+}

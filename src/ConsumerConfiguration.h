@@ -11,6 +11,7 @@ class ConsumerConfiguration : public Php::Base {
     ConsumerConfiguration(){};
 
     Php::Value setConsumerType(Php::Parameters &params);
+    Php::Value setSchema(Php::Parameters &params);
 };
 
 void registerConsumerConfiguration(Php::Namespace &pulsarNamespace);
