@@ -1,6 +1,6 @@
 #include "Producer.h"
 #include "Message.h"
-#include "pulsar/result.h"
+#include <pulsar/Result.h>
 
 Php::Value Producer::send(Php::Parameters &params) {
     auto message = (Message *)(params[0].implementation());
