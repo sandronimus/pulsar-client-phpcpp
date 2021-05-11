@@ -51,10 +51,34 @@ Php::Value Client::subscribe(Php::Parameters &params) {
     return Php::Object("Pulsar\\Consumer", consumer);
 }
 
+Php::Value Client::subscribeWithRegex(Php::Parameters &params) {
+    Consumer *consumer = new Consumer();
+
+    if (params.size() == 2 && params[0].isString() && params[1].isString()) {
+        std::string regexPattern = params[0];
+        std::string consumerName = params[1];
+        this->client->subscribeWithRegex(regexPattern, consumerName, consumer->consumer);
+        return Php::Object("Pulsar\\Consumer", consumer);
+    }
+
+    if (params.size() == 3 && params[0].isString() && params[1].isString() &&
+        params[2].isObject()) {
+        std::string regexPattern = params[0];
+        std::string consumerName = params[1];
+        auto conf = (ConsumerConfiguration *)(params[2].implementation());
+        this->client->subscribeWithRegex(regexPattern, consumerName, conf->config,
+                                consumer->consumer);
+        return Php::Object("Pulsar\\Consumer", consumer);
+    }
+
+    return Php::Object("Pulsar\\Consumer", consumer);
+}
+
 void registerClient(Php::Namespace &pulsarNamespace) {
     Php::Class<Client> client("Client");
     client.method<&Client::__construct>("__construct");
     client.method<&Client::createProducer>("createProducer");
     client.method<&Client::subscribe>("subscribe");
+    client.method<&Client::subscribeWithRegex>("subscribeWithRegex");
     pulsarNamespace.add(client);
 }

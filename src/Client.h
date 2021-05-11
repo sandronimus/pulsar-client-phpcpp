@@ -16,6 +16,8 @@ class Client : public Php::Base {
 
     Php::Value subscribe(Php::Parameters &params);
 
+    Php::Value subscribeWithRegex(Php::Parameters &params);
+
     // Php::Value createReader(Php::Parameters &params);
 
     // Php::Value getPartitionsForTopic(Php::Parameters &params);
