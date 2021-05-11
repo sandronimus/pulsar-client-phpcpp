@@ -78,7 +78,7 @@ void registerMessageBuilder(Php::Namespace &pulsarNamespace) {
     builder.method<&MessageBuilder::setContent>("setContent");
     builder.method<&MessageBuilder::setProperty>("setProperty");
     builder.method<&MessageBuilder::setProperties>("setProperties");
-    builder.method<&MessageBuilder::setPartitionKey>("setPartiionKey");
+    builder.method<&MessageBuilder::setPartitionKey>("setPartitionKey");
     builder.method<&MessageBuilder::setOrderingKey>("setOrderingKey");
     builder.method<&MessageBuilder::setDeliverAfter>("setDeliverAfter");
     builder.method<&MessageBuilder::setDeliverAt>("setDeliverAt");
