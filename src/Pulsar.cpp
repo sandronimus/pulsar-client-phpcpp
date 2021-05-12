@@ -1,4 +1,5 @@
 #include "Client.h"
+#include "ClientConfiguration.h"
 #include "Consumer.h"
 #include "ConsumerConfiguration.h"
 #include "Message.h"
@@ -23,6 +24,7 @@ PHPCPP_EXPORT void *get_module() {
     registerProducerConfiguration(pulsarNamespace);
     registerConsumer(pulsarNamespace);
     registerClient(pulsarNamespace);
+    registerClientConfiguration(pulsarNamespace);
     registerConsumerConfiguration(pulsarNamespace);
     registerSchema(pulsarNamespace);
     registerResult(pulsarNamespace);

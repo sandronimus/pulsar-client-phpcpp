@@ -17,7 +17,7 @@ make -j4
 
 ## Examples
 
-`php -dextension=./pulsar.so examples/test-consumer.php`
+`php -dextension=./output/pulsar.so examples/test-consumer.php`
 
 See [examples](./examples) for more examples.
 

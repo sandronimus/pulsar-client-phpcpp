@@ -1,4 +1,5 @@
 #include "Client.h"
+#include "ClientConfiguration.h"
 #include "Consumer.h"
 #include "ConsumerConfiguration.h"
 #include "Producer.h"
@@ -6,7 +7,15 @@
 
 void Client::__construct(Php::Parameters &params) {
     std::string serviceUrl = params[0];
-    this->client = new ::pulsar::Client(serviceUrl);
+
+    if (params.size() == 1) {
+        this->client = new ::pulsar::Client(serviceUrl);
+    }
+
+    if (params.size() == 2) {
+        auto conf = (ClientConfiguration *)(params[1].implementation());
+        this->client = new ::pulsar::Client(serviceUrl, conf->config);
+    }
 }
 
 Php::Value Client::createProducer(Php::Parameters &params) {
