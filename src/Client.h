@@ -22,7 +22,7 @@ class Client : public Php::Base {
 
     // Php::Value getPartitionsForTopic(Php::Parameters &params);
 
-    // void close();
+    void close();
 
     // void shutdown();
 };

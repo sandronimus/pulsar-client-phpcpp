@@ -83,11 +83,16 @@ Php::Value Client::subscribeWithRegex(Php::Parameters &params) {
     return Php::Object("Pulsar\\Consumer", consumer);
 }
 
+void Client::close() {
+    this->client->close();
+}
+
 void registerClient(Php::Namespace &pulsarNamespace) {
     Php::Class<Client> client("Client");
     client.method<&Client::__construct>("__construct");
     client.method<&Client::createProducer>("createProducer");
     client.method<&Client::subscribe>("subscribe");
     client.method<&Client::subscribeWithRegex>("subscribeWithRegex");
+    client.method<&Client::close>("close");
     pulsarNamespace.add(client);
 }
