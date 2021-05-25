@@ -39,7 +39,8 @@ while (true) {
         'foo' => 'bar',
         'iteration' => $i,
     ]))
-    ->setProperties($prop);
+    ->setProperties($prop)
+    ->setEventTimestamp(time());
 
 
 

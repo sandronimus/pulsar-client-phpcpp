@@ -18,6 +18,9 @@ class Message : public Php::Base {
     Php::Value getMessageId();
     Php::Value getPartitionKey();
     Php::Value hasPartitionKey();
+
+    Php::Value getPublishTimestamp();
+    Php::Value getEventTimestamp();
 };
 
 void registerMessage(Php::Namespace &pulsarNamespace);

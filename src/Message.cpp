@@ -32,6 +32,16 @@ Php::Value Message::hasPartitionKey() {
    return this->message.hasPartitionKey(); 
 }
 
+Php::Value Message::getPublishTimestamp() {
+    int publishTimestamp = (int) this->message.getPublishTimestamp();
+    return publishTimestamp;
+}
+
+Php::Value Message::getEventTimestamp() {
+    int eventTimestamp = (int) this->message.getEventTimestamp();
+    return eventTimestamp;
+}
+
 void registerMessage(Php::Namespace &pulsarNamespace) {
     Php::Class<Message> message("Message");
     message.method<&Message::getDataAsString>("getDataAsString");
@@ -41,5 +51,7 @@ void registerMessage(Php::Namespace &pulsarNamespace) {
     message.method<&Message::getMessageId>("getMessageId");
     message.method<&Message::getPartitionKey>("getPartitionKey");
     message.method<&Message::hasPartitionKey>("hasPartitionKey");
+    message.method<&Message::getPublishTimestamp>("getPublishTimestamp");
+    message.method<&Message::getEventTimestamp>("getEventTimestamp");
     pulsarNamespace.add(message);
 }

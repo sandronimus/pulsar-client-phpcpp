@@ -12,10 +12,16 @@ void Consumer::acknowledge(Php::Parameters &params) {
     this->consumer.acknowledge(message->message);
 }
 
+void Consumer::negativeAcknowledge(Php::Parameters &params) {
+    auto message = (Message *)(params[0].implementation());
+    this->consumer.negativeAcknowledge(message->message);
+}
+
 void registerConsumer(Php::Namespace &pulsarNamespace) {
     Php::Class<Consumer> consumer("Consumer");
     consumer.method<&Consumer::receive>("receive");
     consumer.method<&Consumer::acknowledge>("acknowledge");
+    consumer.method<&Consumer::negativeAcknowledge>("negativeAcknowledge");
 
     consumer.property("ConsumerExclusive", ::pulsar::ConsumerExclusive,
                       Php::Const);

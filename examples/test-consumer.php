@@ -35,5 +35,8 @@ while (true) {
     var_dump($message->getDataAsString());
     var_dump($message->getProperties());
     var_dump($message->getProperty('hello'));
+    var_dump($message->getEventTimestamp());
     $consumer->acknowledge($message);
 }
+
+$client->close();

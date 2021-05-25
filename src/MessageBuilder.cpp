@@ -43,7 +43,7 @@ Php::Value MessageBuilder::setDeliverAt(Php::Parameters &params) {
 
 Php::Value MessageBuilder::setEventTimestamp(Php::Parameters &params) {
     int64_t eventTimestamp = params[0];
-    this->builder.setDeliverAt(eventTimestamp);
+    this->builder.setEventTimestamp(eventTimestamp);
     return Php::Object(MESSAGE_BUILDER_CLASS_NAME, this);
 }
 

@@ -14,6 +14,7 @@ class Consumer : public Php::Base {
     Php::Value receive(Php::Parameters &params);
 
     void acknowledge(Php::Parameters &params);
+    void negativeAcknowledge(Php::Parameters &params);
 };
 
 void registerConsumer(Php::Namespace &pulsarNamespace);
