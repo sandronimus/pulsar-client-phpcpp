@@ -1,4 +1,4 @@
-FROM php:7.3-fpm-alpine3.10
+FROM php:8.0-fpm-alpine3.14
 
 ENV BUILD_DEPS \
     bash \
@@ -27,17 +27,19 @@ ENV BUILD_DEPS \
 
 RUN apk add --no-cache --virtual build-deps $BUILD_DEPS
 
-RUN git clone https://github.com/CopernicaMarketingSoftware/PHP-CPP.git \
+RUN git clone https://github.com/Minds/PHP-CPP.git \
     && cd PHP-CPP \
-    && make \
+    && git checkout php80 \
+    && make -j4 \
     && make install \
     && cd ..
 
 RUN git clone --depth 1 https://github.com/apache/pulsar.git \
     && cd pulsar/pulsar-client-cpp \
-    && cmake . \
+    && cmake . -DBUILD_TESTS=OFF \
     && make \
-    && cd ..
+    && make install \
+    && cd ../..
 
 # Cleanup
 

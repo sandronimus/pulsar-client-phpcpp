@@ -8,9 +8,17 @@ class Client : public Php::Base {
   public:
     pulsar::Client *client;
 
+    /**
+     * c++ constructor
+     */
+    Client() {}
+
+    /**
+     * c++ destructor
+     */
     ~Client() {}
 
-    void __construct(Php::Parameters &params);
+    Php::Value init(Php::Parameters &params);
 
     Php::Value createProducer(Php::Parameters &params);
 

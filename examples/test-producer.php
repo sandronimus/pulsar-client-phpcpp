@@ -6,7 +6,8 @@ use Pulsar\ProducerConfiguration;
 use Pulsar\SchemaType;
 use Pulsar\Result;
 
-$client = new Client("pulsar://127.0.0.1:6650");
+$client = new Client();
+$client->init("pulsar://127.0.0.1:6650");
 
 $schema = json_encode([
     'type' => 'record', // ??

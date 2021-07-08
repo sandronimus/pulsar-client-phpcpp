@@ -10,7 +10,8 @@ $clientConfig = new ClientConfiguration();
 $clientConfig->setUseTls(true)
     ->setTlsTrustCertsFilePath(dirname(__FILE__) . '/tls.crt');
 
-$client = new Client("pulsar+ssl://127.0.0.1:6651", $clientConfig);
+$client = new Client();
+$client->init("pulsar+ssl://127.0.0.1:6651", $clientConfig);
 
 $schema = json_encode([
     'type' => 'record', // ??

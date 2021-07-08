@@ -5,7 +5,7 @@
 #include "Producer.h"
 #include "ProducerConfiguration.h"
 
-void Client::__construct(Php::Parameters &params) {
+Php::Value Client::init(Php::Parameters &params) {
     std::string serviceUrl = params[0];
 
     if (params.size() == 1) {
@@ -16,6 +16,8 @@ void Client::__construct(Php::Parameters &params) {
         auto conf = (ClientConfiguration *)(params[1].implementation());
         this->client = new ::pulsar::Client(serviceUrl, conf->config);
     }
+
+    return this;
 }
 
 Php::Value Client::createProducer(Php::Parameters &params) {
@@ -33,8 +35,7 @@ Php::Value Client::createProducer(Php::Parameters &params) {
         return Php::Object("Pulsar\\Producer", producer);
     }
 
-    ProducerConfiguration producerConf;
-    
+    return Php::Object("Pulsar\\Producer", producer);
 }
 
 Php::Value Client::subscribe(Php::Parameters &params) {
@@ -89,7 +90,7 @@ void Client::close() {
 
 void registerClient(Php::Namespace &pulsarNamespace) {
     Php::Class<Client> client("Client");
-    client.method<&Client::__construct>("__construct");
+    client.method<&Client::init>("init");
     client.method<&Client::createProducer>("createProducer");
     client.method<&Client::subscribe>("subscribe");
     client.method<&Client::subscribeWithRegex>("subscribeWithRegex");
