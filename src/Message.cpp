@@ -12,10 +12,16 @@ Php::Value Message::getProperties() {
 }
 
 Php::Value Message::getProperty(Php::Parameters &params) {
+    if (params.size() == 0) {
+        return Php::Value();
+    }
     return this->message.getProperty(params[0]);
 }
 
 Php::Value Message::hasProperty(Php::Parameters &params) {
+    if (params.size() == 0) {
+        return Php::Value(false);
+    }
     return this->message.hasProperty(params[0]);
 }
 
